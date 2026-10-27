@@ -87,6 +87,7 @@ export default function App() {
         localStorage.removeItem(TOKEN_KEY); setToken(''); setUser(null);
         setError('Анонимная сессия истекла. Создай новую.');
       } else setError(e.message);
+      throw e;
     } finally { setLoading(false); }
   }, [token]);
 
