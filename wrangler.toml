@@ -1,6 +1,11 @@
 name = "ghost-message"
-pages_build_output_dir = "./dist"
+main = "src/worker.js"
 compatibility_date = "2026-10-28"
+
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
 
 [[d1_databases]]
 binding = "DB"
