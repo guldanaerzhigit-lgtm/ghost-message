@@ -1,0 +1,8 @@
+name = "ghost-message"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-10-28"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "ghost-message-db"
+database_id = "464da1a3-1300-458d-bdbc-2220767fa0b3"
