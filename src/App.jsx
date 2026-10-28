@@ -6,6 +6,8 @@ import {
 } from 'lucide-react';
 
 const TOKEN_KEY = 'ghost_message_token';
+const TAB_KEY = 'ghost_message_tab';
+const VALID_TABS = ['home', 'messages', 'send', 'notifications', 'profile', 'feed'];
 const API = '/api';
 const relativeTime = (value) => {
   if (!value) return 'сейчас';
@@ -23,7 +25,10 @@ const mapMessage = (m, type = 'inbox') => ({
 });
 
 export default function App() {
-  const [tab, setTab] = useState('home');
+  const [tab, setTab] = useState(() => {
+    const saved = localStorage.getItem(TAB_KEY);
+    return VALID_TABS.includes(saved) ? saved : 'home';
+  });
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY) || '');
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -39,6 +44,8 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => { localStorage.setItem(TAB_KEY, tab); }, [tab]);
 
   const notify = (text) => { setToast(text); window.setTimeout(() => setToast(''), 2800); };
   const go = (next) => { setTab(next); setActiveMessage(null); setError(''); };
